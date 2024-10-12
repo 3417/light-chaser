@@ -1,102 +1,38 @@
-[中文](README_ZH.md)
+## 项目介绍
+数据可视化工具
 
-<h2> LIGHT CHASER</h2>
+light chaser 是一款开源免费的数据可视化设计工具，基于 React18、Vite5、TypeScript5 技术栈实现。 通过它，你可以简单快速地制作数据可视化相关内容。它可用于大屏幕数据 可视化展示、数据报告、数据分析等场景。
 
-<p>
-    <img alt="" src="https://img.shields.io/badge/version-v1.5.0-blue">
-    <img alt="" src="https://img.shields.io/badge/license-MIT-08CE5D?logoColor=08CE5D">
-    <img alt="" src="https://img.shields.io/badge/TypeScript-blue">
-    <img alt="" src="https://img.shields.io/badge/React-61daeb?logoColor=08CE5D">
-    <img alt="" src="https://img.shields.io/badge/Vite-purple">
-    <img alt="" src="https://img.shields.io/badge/Mobx-FFEB0B">
-</p>
 
-<p>Data visualization tools</p>
+## 二开项目介绍
+1. 添加自定义组件
+2. 添加vchart图表组件
 
-light chaser is an open source free data visualization design tool based on React technology stack implementation .
-Through it you can simply and quickly produce data visualization related content. It can be used for large-screen data
-visualization display , data reports, data analysis and other scenes
 
-This project contains:
+## 快速开始
 
-- A standard component editing panel
-- An efficient blueprint editor for event interactions
-- Rich component library
-
-light chaser is built for data visualization and will continue to grow and improve!
-
-# Catalogs
-
-- [Document](#document)
-- [Example](#example)
-- [Usage & Deployment](#usage--deployment)
-- [Contributing](#contributing)
-- [License](#license)
-
-# Document
-
-For more information about the designer, please refer to it
-[Document](https://xiaopujun.github.io/light-chaser-doc/#/)
-
-# Example
-
-You can visit [LIGHT CHASER online](https://xiaopujun.github.io/light-chaser-app/#) to experience it online, or you can
-launch it locally with the code to experience it!
-
-preview image：
-
-![示例1](https://s2.loli.net/2024/09/21/U2Ni3pfaE1rJVAM.png)
-
-![示例2](https://s2.loli.net/2024/09/26/pitkUF2GogRYnxO.jpg)
-
-![示例3](https://i.072333.xyz/file/802e2d2b4d95fa32fae48.png)
-
-# Usage & Deployment
-
-If you need to start this project locally or build and deploy it to your own server, please refer to the following
-commands:
-
-- Clone the project to your local machine
-
-```shell
-git clone https://gitee.com/xiaopujun/light-chaser.git
+### 安装
 ```
-
-- Install project dependencies
-
-> Note: This project uses pnpm as the package management tool, so you need to install [pnpm](https://pnpm.io/) first
-> ,if you have installed pnpm, you can skip this step
-
-```shell
 pnpm install
+
 ```
 
-- Start the project
 
-```shell
+### 运行
+
+```
 pnpm dev
+
 ```
 
-- Access the project
 
-```shell
-http://localhost:5173
+### 打包
+
 ```
-
-- Build the project
-
-```shell
 pnpm build
 ```
 
-# Contributing
-
-Feel free to dive in! Open an issue or submit PRs.
-
-light chaser follows the Contributor Covenant Code of Conduct.
-
-# License
-
-[MIT](LICENSE) © xiaopujun
-
-Thank you to every developer and person who contributed to this project!
+## 注： 联系原作者
+<div style="display: flex">
+    <div  style="width: 50%"><img alt="group" src="https://i.072333.xyz/file/110e9602ef12a7d93bff0.jpg"></div>
+</div>
