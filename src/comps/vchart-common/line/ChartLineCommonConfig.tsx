@@ -1,5 +1,4 @@
 import React from 'react';
-import {AntdCartesianCoordinateSys} from "../config/AntdFragment";
 import ChartCommonLineController from "./ChartCommonLineController.ts";
 import AntdCommonUtil from "../../antd-common/AntdCommonUtil.ts";
 import {Control} from "../../../json-schema/SchemaTypes.ts";
@@ -7,29 +6,19 @@ import {FieldChangeData, LCGUI} from "../../../json-schema/LCGUI.tsx";
 import {ConfigType} from "../../../designer/right/ConfigContent.tsx";
 import {ChartsBaseDesignController} from "../ChartsBaseDesignController.ts";
 
-
-import {ShapeAttrs} from "@antv/g-base";
-import {LineOptions, ShapeStyle} from "@antv/g2plot";
-
-
 export function AntdLineCommonStyleConfig(props: ConfigType<ChartCommonLineController>) {
     const {controller} = props;
-    const config = controller.getConfig()!.style!;
-
-    const lineCoordinateSysChange = (config: LineOptions) => {
-        controller.update({style: config});
-    }
-
+    const config = controller.getConfig();
     return (
         <>
-            <AntdLineCommonGraphics controller={controller}/>
+            <ChartLineCommonGraphics controller={controller}/>
         </>
     );
 }
 
 export const ChartLineCommonFieldMapping: React.FC<ConfigType<ChartsBaseDesignController>> = ({controller}) => {
     const options = AntdCommonUtil.getDataFieldOptions(controller);
-    const config = controller.getConfig()?.style;
+    const config = controller.getConfig();
     const schema: Control = {
         type: 'grid',
         key: 'style',
@@ -63,15 +52,14 @@ export const ChartLineCommonFieldMapping: React.FC<ConfigType<ChartsBaseDesignCo
 }
 
 export function ChartLineCommonGraphics(props: ConfigType<ChartCommonLineController>) {
-
     const {controller} = props;
-    const config = controller.getConfig()?.style;
-
+    const config = controller.getConfig();
     const onFieldChange = (fieldChangeData: FieldChangeData) => {
         const {dataFragment} = fieldChangeData;
+        console.log("获取修改的数据：",dataFragment,fieldChangeData)
         controller.update(dataFragment);
     }
-
+    // 定义配置的schema数据
     const schema: Control = {
         type: 'accordion',
         label: '图形',
@@ -81,25 +69,41 @@ export function ChartLineCommonGraphics(props: ConfigType<ChartCommonLineControl
             {
                 type: 'sub-accordion',
                 label: '线条',
+                key:'line',
                 children: [
                     {
                         type: 'grid',
+                        key: 'style',
                         children: [
                             {
-                                key: 'smooth',
-                                type: 'switch',
+                                key: 'curveType',
+                                type: 'select',
                                 label: '平滑',
                                 tip: '对阶梯图无效',
-                                value: config?.smooth,
+                                value: config?.line?.style?.curveType,
+                                config:{
+                                    options: [
+                                        {label: 'basis', value: 'basis'},
+                                        {label: 'linear', value: 'linear'},
+                                        {label: 'monotone', value: 'monotone'},
+                                        {label: 'monotoneX', value: 'monotoneX'},
+                                        {label: 'monotoneY', value: 'monotoneY'},
+                                        {label: 'step', value: 'step'},
+                                        {label: 'stepAfter', value: 'stepAfter'},
+                                        {label: 'stepBefore', value: 'stepBefore'},
+                                        {label: 'linearClosed', value: 'linearClosed'},
+                                        {label: 'catmullRom', value: 'catmullRom'},
+                                        {label: 'catmullRomClosed', value: 'catmullRomClosed'}
+                                    ]
+                                }
                             },
                             {
-                                key: 'lineStyle',
                                 children: [
                                     {
                                         key: 'lineWidth',
                                         type: 'number-input',
                                         label: '宽度',
-                                        value: (config?.lineStyle as ShapeAttrs)?.lineWidth,
+                                        value: config?.line?.style?.lineWidth,
                                         config: {
                                             min: 0,
                                             max: 10,
@@ -108,10 +112,10 @@ export function ChartLineCommonGraphics(props: ConfigType<ChartCommonLineControl
                                 ]
                             },
                             {
-                                key: 'color',
+                                key:'stroke',
                                 type: 'color-picker',
                                 label: '颜色',
-                                value: config?.color,
+                                value: config?.line.style?.stroke,
                                 config: {
                                     showText: true
                                 }
@@ -123,66 +127,61 @@ export function ChartLineCommonGraphics(props: ConfigType<ChartCommonLineControl
             {
                 type: 'sub-accordion',
                 label: '数据点',
+                key:'point',
                 children: [
                     {
-                        key: 'point',
+                        key: 'style',
                         type: 'grid',
                         children: [
                             {
                                 key: 'size',
                                 type: 'number-input',
                                 label: '尺寸',
-                                value: config?.point?.size,
+                                value: config?.point?.style?.size,
                                 config: {
                                     min: 0,
                                     max: 10,
                                 }
                             },
                             {
-                                key: 'color',
+                                key: 'fill',
                                 type: 'color-picker',
                                 label: '颜色',
-                                value: (config?.point as ShapeAttrs)?.color,
+                                value: config?.point?.style?.fill,
                                 config: {
                                     showText: true
                                 }
                             },
                             {
-                                key: 'style',
-                                children: [
-                                    {
-                                        key: 'lineWidth',
-                                        type: 'number-input',
-                                        label: '描边宽',
-                                        value: (config?.point?.style as ShapeStyle)?.lineWidth,
-                                        config: {
-                                            min: 0
-                                        }
-                                    },
-                                    {
-                                        key: 'stroke',
-                                        type: 'color-picker',
-                                        label: '描边色',
-                                        value: (config?.point?.style as ShapeStyle)?.stroke,
-                                        config: {
-                                            showText: true,
-                                        }
-                                    },
-                                ]
-                            },
-                            {
-                                key: 'shape',
+                                key: 'symbolType',
                                 type: 'select',
                                 label: '形状',
-                                value: config?.point?.shape,
+                                value: config?.point?.style?.symbolType,
                                 config: {
                                     options: [
-                                        {value: 'circle', label: '圈形'},
-                                        {value: 'square', label: '方形'},
-                                        {value: 'bowtie', label: '领结'},
-                                        {value: 'diamond', label: '钻石'},
-                                        {value: 'hexagon', label: '六角形'},
-                                        {value: 'triangle', label: '三角形'}]
+                                        {value: 'circle', label: 'circle'},
+                                        {value: 'cross', label: 'cross'},
+                                        {value: 'diamond', label: 'diamond'},
+                                        {value: 'square', label: 'square'},
+                                        {value: 'arrow', label: 'arrow'},
+                                        {value: 'arrow2Left', label: 'arrow2Left'},
+                                        {value: 'arrow2Right', label: 'arrow2Right'},
+                                        {value: 'wedge', label: 'wedge'},
+                                        {value: 'thinTriangle', label: 'thinTriangle'},
+                                        {value: 'triangle', label: 'triangle'},
+                                        {value: 'triangleUp', label: 'triangleUp'},
+                                        {value: 'triangleDown', label: 'triangleDown'},
+                                        {value: 'triangleRight', label: 'triangleRight'},
+                                        {value: 'triangleLeft', label: 'triangleLeft'},
+                                        {value: 'stroke', label: 'stroke'},
+                                        {value: 'star', label: 'star'},
+                                        {value: 'wye', label: 'wye'},
+                                        {value: 'rect', label: 'rect'},
+                                        {value: 'arrowLeft', label: 'arrowLeft'},
+                                        {value: 'arrowRight', label: 'arrowRight'},
+                                        {value: 'rectRound', label: 'rectRound'},
+                                        {value: 'roundLine', label: 'roundLine'},
+                                    ]
                                 }
                             },
                         ]

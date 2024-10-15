@@ -21,7 +21,7 @@ abstract class AbstractLineDefinition extends ChartsCommonDefinition<AntdCommonL
     }
 
     getMenuList(): Array<MenuInfo> {
-        return getDefaultMenuList();
+        return getDefaultMenuList().filter((item: MenuInfo) => item.key !== 'theme');
     }
 
     getMenuToConfigContentMap(): MenuToConfigMappingType {

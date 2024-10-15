@@ -1,17 +1,17 @@
 import baseLineImg from "./base-line.png";
-import AbstractLineDefinition from "../../antd-common/line/AbstractLineDefinition";
-import {AntdLineProps} from "../../antd-common/line/AntdCommonLineController";
-import {BaseInfoType} from "../../../framework/core/AbstractDefinition";
+import AbstractLineDefinition from "../../vchart-common/line/AbstractLineDefinition";
+import { AntdLineProps } from "../../vchart-common/line/ChartCommonLineController";
+import { BaseInfoType } from "../../../framework/core/AbstractDefinition";
 
 
 class AntdBaseLineDefinition extends AbstractLineDefinition {
 
     getBaseInfo(): BaseInfoType {
         return {
-            compName: "Chart基础折线图1111",
+            compName: "Chart基础折线图展示",
             compKey: "ChartBaseLine",
-            categorize: "chart",
-            subCategorize: "line",
+            categorize: "vChart",
+            subCategorize: "vline",
         };
     }
 
@@ -19,83 +19,56 @@ class AntdBaseLineDefinition extends AbstractLineDefinition {
         return baseLineImg;
     }
 
-    getInitConfig(): AntdLineProps {
+    getInitConfig() {
         const values = [
-            {"time": "2:00", "value": 8},
-            {"name": "4:00", "value": 9},
-            {"name": "6:00", "value": 12},
-            {"name": "8:00", "value": 13},
-            {"name": "10:00", "value": 15},
-            {"name": "12:00", "value": 18},
-            {"name": "14:00", "value": 20}];
+            { "time": "2:00", "value": 8 },
+            { "time": "4:00", "value": 9 },
+            { "time": "6:00", "value": 12 },
+            { "time": "8:00", "value": 13 },
+            { "time": "10:00", "value": 15 },
+            { "time": "12:00", "value": 18 },
+            { "time": "14:00", "value": 20 }];
         return {
             base: {
                 id: "",
-                name: '基础折线图',
+                name: 'Charts基础折线图',
                 type: 'ChartBaseLine',
             },
-            style: {
-                data: {values},
-                xField: "time",
-                yField: "value",
-                background:'transparent',
-                smooth: false,
-                color: "#00d7ff",
-                point: {
-                    style: {
-                        size:4,
-                        lineWidth: 0,
-                        stroke: "#00d7ff"
+            background: 'transparent',
+            type: 'line',
+            xField: 'time',
+            yField: 'value',
+            axes: [
+                {
+                    orient: 'left',
+                    grid: {
+                        visible: false,
+                        style: {
+                            stroke: "black",
+                            lineDash: [5, 5]
+                        }
                     }
-                },
-                lineStyle: {
-                    lineWidth: 2,
-                },
-                xAxis: {
-                    grid: null,
-                    label: {
-                        style: {
-                            fill: "#969696ff",
-                            fontSize: 10,
-                        },
-                    },
-                    line: null,
-                    tickLine: null,
-                    subTickLine: null,
-                    position: "bottom",
-                    title: null,
-                },
-                yAxis: {
-                    grid: null,
-                    label: {
-                        style: {
-                            fill: "#b1b1b1ff",
-                            fontSize: 9,
-                        },
-                    },
-                    line: {
-                        style: {
-                            stroke: "#9e9e9e7d",
-                            lineWidth: 1,
-                        },
-                    },
-                    tickLine: null,
-                    subTickLine: null,
-                    position: "left",
-                    title: null,
-                },
-                animation: {
-                    appear: {
-                        animation: "wave-in",
-                        duration: 3000,
-                    },
-                },
-
-            },
+                }
+            ],
             data: {
+                id: 'line',
                 sourceType: 'static',
-                staticData: data
+                staticData: values
             },
+            line: {
+                style: {
+                    curveType: 'basic',
+                    lineWidth: 2,
+                    stroke: "#00d7ff"
+                }
+            },
+            point: {
+                style: {
+                    size: 2,
+                    fill: '',
+                    symbolType: 'circle'
+                }
+            }
         };
     }
 }

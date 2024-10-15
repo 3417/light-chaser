@@ -1,5 +1,5 @@
 import {ICategorize} from "../../../framework/core/AbstractDefinition";
-import {AllApplication, Browser, Cube, MapDraw, Monitor, Other, PieThree, Platte, Text} from "@icon-park/react";
+import {AllApplication, Browser, Cube, MapDraw, Monitor, Other, PieThree, Platte, Text,PieSeven  } from "@icon-park/react";
 
 export const componentCategorize: ICategorize[] = [
     {
@@ -46,7 +46,12 @@ export const componentCategorize: ICategorize[] = [
         key: "other",
         name: "其他",
         icon: Other
-    }
+    },
+    {
+        key:'vChart',
+        name:'vChart图表',
+        icon:PieSeven
+    },
 ];
 
 export const componentSubCategorize: ICategorize[] = [
@@ -113,5 +118,12 @@ export const componentSubCategorize: ICategorize[] = [
         key: "radial",
         name: "玉珏图",
         parentKey: "chart"
+    },
+
+    // vChart图表
+    {
+        key: "vline",
+        name: "vChart折线图",
+        parentKey: "vChart"
     },
 ];

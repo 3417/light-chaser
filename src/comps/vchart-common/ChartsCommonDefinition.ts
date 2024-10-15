@@ -2,7 +2,7 @@ import AbstractController from '../../framework/core/AbstractController';
 import { AbstractDefinition, ActionInfo, EventInfo } from '../../framework/core/AbstractDefinition';
 
 // 右侧相关交互
-export abstract class ChartsCommonDefinition extends AbstractDefinition {
+export abstract class ChartsCommonDefinition<C,P> extends AbstractDefinition<C,P> {
 
     getEventList(): EventInfo[] {
         return [
